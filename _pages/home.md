@@ -1,4 +1,9 @@
+
 ---
+title: "홈"
+permalink: /home/
+---
+
 layout: splash
 permalink: /
 hidden: true
