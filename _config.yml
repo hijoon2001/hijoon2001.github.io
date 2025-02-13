@@ -1,5 +1,6 @@
 
 minimal_mistakes_skin    : "dirt" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
+toc: true
 
 # Site Settings
 locale                   : "ko-KR"
@@ -92,16 +93,16 @@ social:
 
 # Analytics
 analytics:
-  provider               : # false (default), "google", "google-universal", "google-gtag", "custom"
+  provider               : google # false (default), "google", "google-universal", "google-gtag", "custom"
   google:
-    tracking_id          :
+    tracking_id          : G-10223747251
     anonymize_ip         : # true, false (default)
 
 
 # Site Author
 author:
   name             : "Joanne"
-  avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
+  avatar           : "/assets/images/bio-photo.jpg" 
   bio              : "I've always done whatever, <br> I want and <br> always been exactly who I am."
   location         : "Republic of Korea"
   email            : "hijoon2001@gmail.com"
@@ -189,7 +190,9 @@ markdown_ext: "markdown,mkdown,mkdn,mkd,md"
 # Conversion
 markdown: kramdown
 highlighter: rouge
-lsi: false
+rouge:
+  line_numbers: true  # 줄 번호 활성화
+lsi: true # 이 기능을 활성화하면 Jekyll이 글의 제목과 내용을 분석해서 비슷한 글을 자동으로 추천
 excerpt_separator: "\n\n"
 incremental: false
 
@@ -228,7 +231,7 @@ pagination:
   # Set enabled to true to use paginate v2
   enabled: true
   debug: false
-  collection: 'posts'
+  collections: ['posts','projects']  #  페이지네이션을 여러 컬렉션에 적용
   per_page: 5
   permalink: '/page/:num/'
   title: ':title - page :num'
@@ -241,7 +244,6 @@ pagination:
   trail:
     before: 2
     after: 2
-
 
 # Plugins (previously gems:)
 plugins:
@@ -277,10 +279,12 @@ tag_archive:
   type: liquid
   path: /tags/
 # https://github.com/jekyll/jekyll-archives
-# jekyll-archives:
-#   enabled:
-#     - categories
-#     - tags
+
+jekyll-archives:
+  enabled:
+    - categories
+    - tags
+
 #   layouts:
 #     category: archive-taxonomy
 #     tag: archive-taxonomy

@@ -4,7 +4,17 @@
   {% assign feature_row = page.feature_row %}
 {% endif %}
 
+{% comment %}
+사용자가 id를 지정하면: page[include.id] 값을 가져와서 feature_row로 할당
+id가 없으면: 기본적으로 page.feature_row 값을 가져옴
+즉, feature_row는 현재 페이지(.md 파일)에 정의된 데이터를 사용하게 됨.
+{% endcomment %}
+
 <div class="feature__wrapper">
+
+{% comment %}
+<div class="feature__wrapper">
+{% endcomment %}
 
   {% for f in feature_row %}
     <div class="feature__item{% if include.type %}--{{ include.type }}{% endif %}">

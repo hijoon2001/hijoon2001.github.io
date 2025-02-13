@@ -1,0 +1,33 @@
+<h3>📰 최신 IT 뉴스</h3>
+<ul id="rss-feed"></ul>
+
+<script>
+  async function fetchRSSFeed() {
+      const rssUrl = "https://news.google.com/rss/search?q=technology&hl=ko&gl=KR&ceid=KR:ko"; // Google IT 뉴스 RSS
+      const apiUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(rssUrl)}`;
+
+      try {
+          const response = await fetch(apiUrl);
+          const data = await response.json();
+          const parser = new DOMParser();
+          const xml = parser.parseFromString(data.contents, "text/xml");
+          const items = xml.querySelectorAll("item");
+          let html = "";
+
+          items.forEach((item, index) => {
+              if (index < 5) { // 최신 뉴스 5개만 표시
+                  const title = item.querySelector("title").textContent;
+                  const link = item.querySelector("link").textContent;
+                  html += `<li><a href="${link}" target="_blank">${title}</a></li>`;
+              }
+          });
+
+          document.getElementById("rss-feed").innerHTML = html;
+      } catch (error) {
+          console.error("RSS 가져오기 실패:", error);
+          document.getElementById("rss-feed").innerHTML = "<li>RSS 데이터를 가져올 수 없습니다.</li>";
+      }
+  }
+
+  fetchRSSFeed();
+</script>

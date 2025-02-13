@@ -37,3 +37,30 @@
     </div>
   </div>
 </div>
+
+
+
+<!-- ✅ 검색창(네비게이션 바) 아래에 Google 캘린더 & 최신 IT 뉴스 추가 -->
+{% if page.url == "/" %}
+<section style="max-width: 1200px; margin: 0 auto; padding: 20px;">
+  <div style="display: flex; gap: 30px; align-items: flex-start;">
+    
+    <!-- 📅 왼쪽: Google 캘린더 -->
+    <div style="flex: 3;">
+      <h2 class="archive__title">📆 schedule</h2>
+      <iframe src="https://calendar.google.com/calendar/embed?src=junehee99%40gmail.com&ctz=Asia%2FSeoul"
+      style="border: 0; width: 100%; height: 600px; border-radius: 8px;" frameborder="0" scrolling="no"></iframe>
+    </div>
+
+    <!-- 📰 오른쪽: 최신 IT 뉴스 -->
+    <aside style="flex: 1.5; background: #f8f9fa; padding: 15px; border-radius: 8px; box-shadow: 0px 2px 5px rgba(0,0,0,0.1);">
+      <h3 style="text-align: center; margin-bottom: 15px;">📰 최신 IT 뉴스</h3>
+      <ul id="rss-feed" style="list-style-type: none; padding: 0;">
+        {% include rss-news.html %}
+      </ul>
+    </aside>
+
+  </div>
+</section>
+{% endif %}
+

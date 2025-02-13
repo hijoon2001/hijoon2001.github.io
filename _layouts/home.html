@@ -4,6 +4,14 @@ layout: archive
 
 {{ content }}
 
+<!-- Google 캘린더 추가 -->
+<section>
+  <h2 class="archive__title">📆 schedule </h2>
+  <iframe src="https://calendar.google.com/calendar/embed?src=junehee99%40gmail.com&ctz=Asia%2FSeoul"
+  style="border: 0; width: 100%; height: 600px; margin-top: 20px;" frameborder="0" scrolling="no"></iframe>
+</section>
+
+<!-- 최근 포스트 목록 -->
 <h3 class="archive__subtitle">{{ site.data.ui-text[site.locale].recent_posts | default: "Recent Posts" }}</h3>
 
 {% if paginator %}
@@ -18,3 +26,5 @@ layout: archive
 </div>
 
 {% include paginator.html %}
+
+

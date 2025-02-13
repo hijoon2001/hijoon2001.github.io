@@ -14,4 +14,26 @@ layouts_gallery:
     alt: "archive layout example"
 last_modified_at: 
 toc: true
+
+feature_row:
+  - image_path: /images/project1.jpg
+    title: "내 첫 번째 프로젝트"
+    excerpt: "이 프로젝트는 재미있는 기능이 많아요!"
+    url: "/projects/project1"
+    btn_label: "더 알아보기"
+    btn_class: "btn-primary"
+
+  - image_path: /images/project2.jpg
+    title: "두 번째 프로젝트"
+    excerpt: "이 프로젝트는 머신러닝을 사용해요!"
+    url: "/projects/project2"
+    btn_label: "자세히 보기"
+    btn_class: "btn-secondary"
+
 ---
+
+# About Minimal Mistakes
+Minimal Mistakes is a flexible two-column Jekyll theme that provides many layout options.
+
+## 프로젝트 소개 🚀
+{% include feature_row %}
