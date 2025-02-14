@@ -118,10 +118,13 @@
 
   /* next/previous buttons */
   &--pager {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     padding: 1em 2em;
     float: inline-start;
     width: 50%;
+    min-height: 60px;
     font-family: $sans-serif;
     font-size: $type-size-5;
     font-weight: bold;
@@ -130,6 +133,9 @@
     color: $muted-text-color;
     border: 1px solid mix(#000, $border-color, 25%);
     border-radius: $border-radius;
+    white-space: nowrap; /* 줄바꿈 방지 */
+    overflow: hidden;
+    text-overflow: ellipsis; /* 제목이 너무 길면 ...으로 표시 */
 
     &:hover {
       @include yiq-contrasted($muted-text-color);

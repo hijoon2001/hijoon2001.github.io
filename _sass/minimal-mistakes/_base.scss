@@ -337,3 +337,14 @@ input[type="submit"],
   -webkit-transition: $global-transition;
   transition: $global-transition;
 }
+
+h1.page__title {
+  font-size: 2.5rem; /* 🔥 제목 크기 키우기 */
+  font-weight: bold;
+  text-align: center; /* 🔥 가운데 정렬 */
+  color: #222222; /* 진한 회색 */
+  //background: #ffeb99; /* 🔥 연한 노란색 배경 */
+  padding: 15px;
+  border-radius: 8px;
+  border-bottom: 3px dashed #ffcc00; /* 🔥 하단 강조선 */
+}

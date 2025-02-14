@@ -1,7 +1,7 @@
 ---
 permalink: /about/
-title: "About"
-excerpt: "Minimal Mistakes is a flexible two-column Jekyll theme."
+title: "About me"
+# excerpt: "Minimal Mistakes is a flexible two-column Jekyll theme."
 layouts_gallery:
   - url: /assets/images/mm-layout-splash.png
     image_path: /assets/images/mm-layout-splash.png
@@ -32,8 +32,7 @@ feature_row:
 
 ---
 
-# About Minimal Mistakes
-Minimal Mistakes is a flexible two-column Jekyll theme that provides many layout options.
+Always learning, always building, always evolving.
 
 ## 프로젝트 소개 🚀
-{% include feature_row %}
+<!-- {% include feature_row %} --> 

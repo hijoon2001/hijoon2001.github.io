@@ -2,42 +2,47 @@
 layout: posts
 title: "How Browsers Work"
 categories:
-  - 바이오스
+  - 브라우저
 tags:
-  - 바이오스 
+  - 브라우저 
+classes: wide
 ---
 
+👉🏻출처: [MWD](https://developer.mozilla.org/en-US/docs/Web/Performance/How_browsers_work)
 
+# Populating the page: how browsers work
+페이지 채우기: 브라우저는 어떻게 작동하는가? 
 
-Populating the page: how browsers work
-Users want web experiences with content that is fast to load and smooth to interact with. Therefore, a developer should strive to achieve these two goals.
+## Overview 개요
 
-To understand how to improve performance and perceived performance, it helps to understand how the browser works.
+웹 성능 (web performance) 을 결정하는 주요 두가지는..?  
+- **latency** (지연)
+- **single-threaded** : 하나의 작업을 처음부터 끝까지 실행한 후에야 다음 작업을 처리할 수 있다. 즉 **렌더링 속도 (Render time)**가 핵심~ 
 
-Overview
-Fast sites provide better user experiences. Users want and expect web experiences with content that is fast to load and smooth to interact with.
+## 1. Navigation 
+웹 페이지를 로드할 때 언제나 요구되는 첫번째 스텝!  
+웹 성능에서 중요한 요소 중 하나는 탐색이 완료되는 시간을 최소화하는 것. Latency(지연)와 Bandwidth(대역폭)가 가장 큰 적(foe)! 
 
-Two major issues in web performance are issues having to do with latency and issues having to do with the fact that for the most part, browsers are single-threaded.
+## DNS lookup (DNS 탐색) 
 
-Latency is the biggest threat to our ability to ensure a fast-loading page. It is the developers' goal to make the site load as fast as possible — or at least appear to load super fast — so the user gets the requested information as quickly as possible. Network latency is the time it takes to transmit bytes over the air to computers. Web performance is what we have to do to make the page load as quickly as possible.
+웹 파이지 탐색의 첫 번째 스텝은 해당 페이지의 assets이 어디에 위치해 있는지 찾는거야.    
+예를 들어 너가 https://example.com 이 HTML 페이지에 접속할거야. 이 페이지는  **IP 주소 93.184.216.34**에 위치한 서버에서 제공돼. 만약  처음 방문한다면 이 **DNS 조회(DNS lookup)**가 반드시 이루어져야 해.  
 
-For the most part, browsers are considered single-threaded. That is, they execute a task from beginning to end before taking up another task. For smooth interactions, the developer's goal is to ensure performant site interactions, from smooth scrolling to being responsive to touch. Render time is key, ensuring the main thread can complete all the work we throw at it and still always be available to handle user interactions. Web performance can be improved by understanding the single-threaded nature of the browser and minimizing the main thread's responsibilities, where possible and appropriate, to ensure rendering is smooth and responses to interactions are immediate.
+1. DNS 탐색 과정
+   1) 브라우저가 DNS 조회 요청을 보냄.
+   2) 네임 서버(name server)가 요청을 처리하고 IP 주소를 반환.
+   3) 첫 요청 후, IP 주소가 캐시에 저장됨.
+   - 이후 같은 사이트를 방문할 때는 네임 서버를 거치지 않고 캐시에서 IP를 가져와서 더 빠르게 로드할 수 있당. 
 
-Navigation
-Navigation is the first step in loading a web page. It occurs whenever a user requests a page by entering a URL into the address bar, clicking a link, submitting a form, as well as other actions.
+2. DNS 탐색은 언제 필요할까?
 
-One of the goals of web performance is to minimize the amount of time navigation takes to complete. In ideal conditions, this usually doesn't take too long, but latency and bandwidth are foes that can cause delays.
+dns 탐색은 보통 각각의 호스트네임당 한번 필요해.  
+but... 하지만 페이지에서 폰트, 이미지, 스크립트, 광고 등 다양한 리소스를 다른 호스트네임에서 가져온다면, 각각 DNS 조회가 필요해. 즉, 리소스가 많으면 많을수록 DNS 조회 횟수가 늘어나고, 페이지 로딩 속도가 느려질 수 있다는 거지.. 
 
-DNS lookup
-The first step of navigating to a web page is finding where the assets for that page are located. If you navigate to https://example.com, the HTML page is located on the server with IP address of 93.184.216.34. If you've never visited this site, a DNS lookup must happen.
-
-Your browser requests a DNS lookup, which is eventually fielded by a name server, which in turn responds with an IP address. After this initial request, the IP will likely be cached for a time, which speeds up subsequent requests by retrieving the IP address from the cache instead of contacting a name server again.
-
-DNS lookups usually only need to be done once per hostname for a page load. However, DNS lookups must be done for each unique hostname the requested page references. If your fonts, images, scripts, ads, and metrics all have different hostnames, a DNS lookup will have to be made for each one.
-
+3. 모바일은 더 심해..
 Mobile requests go first to the cell tower, then to a central phone company computer before being sent to the internet
 
-This can be problematic for performance, particularly on mobile networks. When a user is on a mobile network, each DNS lookup has to go from the phone to the cell tower to reach an authoritative DNS server. The distance between a phone, a cell tower, and the name server can add significant latency.
+모바일 네트워크에서는 DNS 조회가 📶 휴대폰 → 기지국(cell tower) → 중앙 통신사 서버 → 인터넷 순으로 진행돼. 이 과정에서 물리적인 거리와 네트워크 지연이 더해지면서 DNS 조회 시간이 크게 증가할 수 있어.
 
 TCP handshake
 Once the IP address is known, the browser sets up a connection to the server via a TCP three-way handshake. This mechanism is designed so that two entities attempting to communicate — in this case the browser and web server — can negotiate the parameters of the network TCP socket connection before transmitting data, often over HTTPS.
@@ -56,25 +61,6 @@ After the eight round trips to the server, the browser is finally able to make t
 Response
 Once we have an established connection to a web server, the browser sends an initial HTTP GET request on behalf of the user, which for websites is most often an HTML file. Once the server receives the request, it will reply with relevant response headers and the contents of the HTML.
 
-html
-Copy to Clipboard
-<!doctype html>
-<html lang="en-US">
-  <head>
-    <meta charset="UTF-8" />
-    <title>My simple page</title>
-    <link rel="stylesheet" href="styles.css" />
-    <script src="myscript.js"></script>
-  </head>
-  <body>
-    <h1 class="heading">My Page</h1>
-    <p>A paragraph with a <a href="https://example.com/about">link</a></p>
-    <div>
-      <img src="my-image.jpg" alt="image description" />
-    </div>
-    <script src="another-script.js"></script>
-  </body>
-</html>
 This response for this initial request contains the first byte of data received. Time to First Byte (TTFB) is the time between when the user made the request — say by clicking on a link — and the receipt of this first packet of HTML. The first chunk of content is usually 14KB of data.
 
 In our example above, the request is definitely less than 14KB, but the linked resources aren't requested until the browser encounters the links during parsing, described below.
@@ -113,12 +99,6 @@ When the parser finds non-blocking resources, such as an image, the browser will
 Preload scanner
 While the browser builds the DOM tree, this process occupies the main thread. As this happens, the preload scanner will parse through the content available and request high-priority resources like CSS, JavaScript, and web fonts. Thanks to the preload scanner, we don't have to wait until the parser finds a reference to an external resource to request it. It will retrieve resources in the background so that by the time the main HTML parser reaches the requested assets, they may already be in flight or have been downloaded. The optimizations the preload scanner provides reduce blockages.
 
-html
-Copy to Clipboard
-<link rel="stylesheet" href="styles.css" />
-<script src="my-script.js" async></script>
-<img src="my-image.jpg" alt="image description" />
-<script src="another-script.js" async></script>
 In this example, while the main thread is parsing the HTML and CSS, the preload scanner will find the scripts and image, and start downloading them as well. To ensure the script doesn't block the process, add the async attribute, or the defer attribute if JavaScript parsing and execution order is important.
 
 Waiting to obtain CSS doesn't block HTML parsing or downloading, but it does block JavaScript because JavaScript is often used to query CSS properties' impact on elements.
@@ -165,7 +145,7 @@ The last step in the critical rendering path is painting the individual nodes to
 
 To ensure smooth scrolling and animation, everything occupying the main thread, including calculating styles, along with reflow and paint, must take the browser less than 16.67ms to accomplish. At 2048 x 1536, the iPad has over 3,145,000 pixels to be painted to the screen. That is a lot of pixels that have to be painted very quickly. To ensure repainting can be done even faster than the initial paint, the drawing to the screen is generally broken down into several layers. If this occurs, then compositing is necessary.
 
-Painting can break the elements in the layout tree into layers. Promoting content into layers on the GPU (instead of the main thread on the CPU) improves paint and repaint performance. There are specific properties and elements that instantiate a layer, including <video> and <canvas>, and any element which has the CSS properties of opacity, a 3D transform, will-change, and a few others. These nodes will be painted onto their own layer, along with their descendants, unless a descendant necessitates its own layer for one (or more) of the above reasons.
+Painting can break the elements in the layout tree into layers. Promoting content into layers on the GPU (instead of the main thread on the CPU) improves paint and repaint performance. There are specific properties and elements that instantiate a layer, including video and canvas, and any element which has the CSS properties of opacity, a 3D transform, will-change, and a few others. These nodes will be painted onto their own layer, along with their descendants, unless a descendant necessitates its own layer for one (or more) of the above reasons.
 
 Layers do improve performance but are expensive when it comes to memory management, so should not be overused as part of web performance optimization strategies.
 

@@ -2,11 +2,12 @@
    Syntax highlighting
    ========================================================================== */
 
+/*코드 블록 전체 스타일 */
 div.highlighter-rouge,
 figure.highlight {
   position: relative;
   margin-bottom: 1em;
-  background: $base00;
+  background: $base0g;
   color: $base05;
   font-family: $monospace;
   font-size: $type-size-6;
@@ -25,6 +26,8 @@ figure.highlight {
   }
 }
 
+/*줄 번호 스타일*/
+
 .highlight table {
   margin-bottom: 0;
   font-size: 1em;
@@ -40,7 +43,7 @@ figure.highlight {
     &.rouge-gutter {
       padding-inline-end: 1em;
       width: 1em;
-      color: $base04;
+      color: $base05;
       border-inline-end: 1px solid $base04;
       text-align: end;
     }
@@ -64,21 +67,24 @@ figure.highlight {
 .highlight .hll {
   background-color: $base06;
 }
+
+
+/*문법 강조 색상*/
 .highlight {
   .c {
-    /* Comment */
-    color: $base04;
+    /* 주석 */
+    color: $base05;
   }
   .err {
     /* Error */
     color: $base08;
   }
   .k {
-    /* Keyword */
+    /* 키워드 */
     color: $base0e;
   }
   .l {
-    /* Literal */
+    /* 함수명 */
     color: $base09;
   }
   .n {

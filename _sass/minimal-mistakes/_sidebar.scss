@@ -87,23 +87,37 @@
       @include clearfix();
       position: -webkit-sticky;
       position: sticky;
-      top: 2em;
-      float: inline-end;
+      top: 80px; /* 기존 값 유지 */
+      float: none;
 
       .toc {
         .toc__menu {
           overflow-y: auto;
-          max-height: calc(100vh - 7em);
+          max-height: calc(100vh - 100px);
         }
       }
     }
   }
 
+  /* 🔥 전체화면에서는 오른쪽에 TOC를 표시 */
   @include breakpoint($x-large) {
-    width: $right-sidebar-width;
-    margin-inline-end: -1 * $right-sidebar-width;
+    position: fixed !important; /* 🔥 항상 화면 우측에 고정 */
+    top: 70px; /* 헤더와 겹치지 않도록 조정 */
+    inset-inline-end: 20px; /* 우측 여백 추가 */
+    width: $right-sidebar-width !important; /* 넓은 화면에서 기본 사이드바 너비 적용 */
+    margin-inline-end: 0 !important; /* 🔥 margin을 제거해 화면 밖으로 밀려나지 않도록 */
+    padding-inline-start: 1em;
+    opacity: 1; /* 항상 보이도록 */
+    z-index: 100; /* 다른 요소보다 위에 위치하도록 */
+
+    &.sticky {
+      position: fixed;
+      top: 80px;
+      float: none;
+    }
   }
 }
+
 
 .splash .sidebar__right {
   @include breakpoint($large) {
